@@ -7,7 +7,15 @@ spring:
 
   jpa:
     show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
 
 endpoint:
   metrics:
     enabled: true
+
+katharsis:
+  resourcePackage: com.creditcards.jarvis.web
+  domainName: http://localhost:8080
+  pathPrefix: /api

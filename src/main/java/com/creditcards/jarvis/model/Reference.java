@@ -1,37 +1,32 @@
 package com.creditcards.jarvis.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "references")
 @JsonApiResource(type = "references")
-public class Reference {
+public class Reference extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonApiId
-    private long id;
+    private Integer id;
 
     private String name;
     private String url;
 
-    @Column(name = "inserted_at")
-    private Timestamp insertedAt;
-
-    @Column(name = "updated_at")
-    private Timestamp updatedAt;
-
     @ManyToOne
+    @JsonBackReference
     private Project project;
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,27 +46,16 @@ public class Reference {
         this.url = url;
     }
 
-    public Timestamp getInsertedAt() {
-        return insertedAt;
-    }
-
-    public void setInsertedAt(Timestamp insertedAt) {
-        this.insertedAt = insertedAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public Project getProject() {
         return project;
     }
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Reference[id=%s, name=%s, url=%s]", id, name, url);
     }
 }

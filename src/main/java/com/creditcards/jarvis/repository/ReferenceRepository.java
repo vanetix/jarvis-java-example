@@ -1,9 +1,9 @@
 package com.creditcards.jarvis.repository;
 
-import com.creditcards.jarvis.model.Project;
+import com.creditcards.jarvis.model.Reference;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProjectRepository extends CrudRepository<Project, Long> {
+public interface ReferenceRepository extends CrudRepository<Reference, Long> {
 }

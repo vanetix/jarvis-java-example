@@ -6,41 +6,35 @@ import io.katharsis.resource.annotations.JsonApiResource;
 import io.katharsis.resource.annotations.SerializeType;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "projects")
 @JsonApiResource(type = "projects")
-public class Project {
+public class Project extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonApiId
-    private long id;
+    private Integer id;
 
     private String name;
     private String repository;
     private String description;
 
-    @Column(name = "inserted_at")
-    private Timestamp insertedAt;
-
-    @Column(name = "updated_at")
-    private Timestamp updatedAt;
-
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     @JsonApiRelation(serialize = SerializeType.ONLY_ID)
-    private List<Environment> environments;
+    private Set<Environment> environments;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     @JsonApiRelation(serialize = SerializeType.ONLY_ID)
-    private List<Reference> references;
+    private Set<Reference> references;
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -68,19 +62,24 @@ public class Project {
         this.description = description;
     }
 
-    public Timestamp getInsertedAt() {
-        return insertedAt;
+    public Set<Environment> getEnvironments() {
+        return environments;
     }
 
-    public void setInsertedAt(Timestamp insertedAt) {
-        this.insertedAt = insertedAt;
+    public void setEnvironments(Set<Environment> environments) {
+        this.environments = environments;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public Set<Reference> getReferences() {
+        return references;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setReferences(Set<Reference> references) {
+        this.references = references;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Project[id=%d, name=%s, repository=%s]", id, name, repository);
     }
 }
