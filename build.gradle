@@ -1,0 +1,46 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.BUILD-SNAPSHOT'
+	}
+
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+}
+
+plugins {
+	id 'java'
+    id 'idea'
+	id 'org.springframework.boot' version '1.5.6.RELEASE'
+}
+
+group = 'com.creditcards'
+version = '0.0.1-SNAPSHOT'
+description = 'Jarvis'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+configurations {
+    compile.exclude module: 'spring-boot-starter-tomcat'
+}
+
+dependencies {
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    compile group: 'io.katharsis', name: 'katharsis-core', version: '3.0.1'
+    compile group: 'io.katharsis', name: 'katharsis-spring', version: '3.0.1'
+
+    runtime group: 'org.springframework.boot', name: 'spring-boot-devtools'
+
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
