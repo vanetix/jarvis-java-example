@@ -2,7 +2,9 @@ package com.creditcards.jarvis.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.katharsis.resource.annotations.JsonApiId;
+import io.katharsis.resource.annotations.JsonApiRelation;
 import io.katharsis.resource.annotations.JsonApiResource;
+import io.katharsis.resource.annotations.SerializeType;
 
 import javax.persistence.*;
 
@@ -20,6 +22,7 @@ public class Environment extends Base {
 
     @ManyToOne
     @JsonBackReference
+    @JsonApiRelation(serialize = SerializeType.EAGER)
     private Project project;
 
     public Integer getId() {

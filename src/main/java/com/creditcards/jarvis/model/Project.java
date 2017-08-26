@@ -6,7 +6,6 @@ import io.katharsis.resource.annotations.JsonApiResource;
 import io.katharsis.resource.annotations.SerializeType;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
